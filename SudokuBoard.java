@@ -15,7 +15,7 @@ public class SudokuBoard {
     }
     public static void createBoard() {
         fillDiagonalFirst(0,0);
-        fillCell(0, 3);
+        fillCell(0, 0);
     }
     public static void fillDiagonalFirst(int r, int c) { //This method is done to take care of the 27 cells in the top-right, center, and bottom-right regions that are independent of solving and can be done first.
         ArrayList<Integer> arr = new ArrayList<Integer> (generateRandomArray());
@@ -49,10 +49,10 @@ public class SudokuBoard {
         for (int i = 0; i < check.size(); i++) {
             nums.remove((Integer)check.get(i));
         }
-        Collections.shuffle(nums); //this is fine, but it needs to be turned into pure recursion. if (fillCell(nextR, nextC) == true) return true;
+        Collections.shuffle(nums);
         while (nums.size() > 0){
             board[r][c] = nums.remove(0);
-            if (isValid(r,c)) {
+            if (check3x3(r,c)) {
                 if (fillCell(r,c+1))
                     return true;
             }
@@ -60,7 +60,7 @@ public class SudokuBoard {
         board[r][c] = 0;
         return false;
     }
-    public static boolean isValid(int row, int col) {
+    public static boolean check3x3(int row, int col) {
         int refRow = row - row%3;
         int refCol = col - col%3;
         ArrayList<Integer> numList = new ArrayList<Integer>();
