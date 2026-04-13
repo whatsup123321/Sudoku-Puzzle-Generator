@@ -39,28 +39,26 @@ public class SudokuBoard {
         if (board[r][c] != 0) {
             return fillCell(r, c+1);
         }
-        else {
-            ArrayList<Integer> check = new ArrayList<Integer>();
-            for (int i = 0; i < board.length; i++)
-                check.add(board[i][c]);
-            for (int i = 0; i < board[0].length; i++)
-                if (!check.contains(board[r][i]))
+        ArrayList<Integer> check = new ArrayList<Integer>();
+        for (int i = 0; i < board.length; i++)
+            check.add(board[i][c]);
+        for (int i = 0; i < board[0].length; i++)
+            if (!check.contains(board[r][i]))
                 check.add(board[r][i]);
-            ArrayList<Integer> nums = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5,6,7,8,9));
-            for (int i = 0; i < check.size(); i++) {
-                nums.remove((Integer)check.get(i));
-            }
-            Collections.shuffle(nums); //this is fine, but it needs to be turned into pure recursion. if (fillCell(nextR, nextC) == true) return true;
-            while (nums.size() > 0){
-                board[r][c] = nums.remove(0);
-                if (isValid(r,c)) {
-                    if (fillCell(r,c+1))
-                        return true;
-                }
-            }
-            board[r][c] = 0;
-            return false;
+        ArrayList<Integer> nums = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5,6,7,8,9));
+        for (int i = 0; i < check.size(); i++) {
+            nums.remove((Integer)check.get(i));
         }
+        Collections.shuffle(nums); //this is fine, but it needs to be turned into pure recursion. if (fillCell(nextR, nextC) == true) return true;
+        while (nums.size() > 0){
+            board[r][c] = nums.remove(0);
+            if (isValid(r,c)) {
+                if (fillCell(r,c+1))
+                    return true;
+            }
+        }
+        board[r][c] = 0;
+        return false;
     }
     public static boolean isValid(int row, int col) {
         int refRow = row - row%3;
