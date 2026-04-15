@@ -20,7 +20,7 @@ public class SudokuBoard {
 
     public static void displayBoard() {
         System.out.println("\nHello, Here is a solved Sudoku Puzzle: ");
-        for (int k = 0; k <=6; k+=3) {
+        for (int k = 0; k <= 6; k+=3) {
             System.out.println("+-------+-------+-------+");
             for (int i = 0+k; i < 3 + k; i++) {
                 for (int j = 0; j < board[i].length; j++) {
@@ -35,7 +35,7 @@ public class SudokuBoard {
         System.out.println("+-------+-------+-------+");
     }
 
-    public static void fillDiagonalFirst(int r, int c) { //This method is done to take care of the 27 cells in the top-right, center, and bottom-right regions that are independent of solving and can be done first.
+    public static void fillDiagonalFirst(int r, int c) { 
         ArrayList<Integer> arr = new ArrayList<Integer> (generateRandomArray());
         int startR = r;
         int startC = c;
@@ -91,8 +91,8 @@ public class SudokuBoard {
             return false;
         return true;
     }
-    
-    public static ArrayList<Integer> generateRandomArray() { //Creates a list of numbers 1-9 randomized
+
+    public static ArrayList<Integer> generateRandomArray() {
         ArrayList<Integer> arr = new ArrayList<Integer>();
         for (int i = 1; i <= 9; i++) {
             arr.add(i);
